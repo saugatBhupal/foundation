@@ -1,5 +1,18 @@
+
 def sendName(first, last):
-    return (first +" " + last)
+    print (f"Your fullname is {first} {last}")
 firstName = input("Enter First Name:")
 secondName = input("Enter Second Name:")
-print("Your full name is: " , sendName(firstName,secondName))
+sendName(firstName,secondName)
+
+
+
+"""
+first = 1
+second = 2
+third = 3
+fourth = 4
+fifth = 5
+
+print(f"my-{first} name-{second} is-{third} abc-{fourth} def-{fifth}")
+"""
