@@ -22,4 +22,8 @@ MName = input("Enter model name: ")
 Price = int(input("Enter price: "))
 retInformation(BName,MName,Price)
 
+"""
+Working model of atm machine
+"""
+
 
