@@ -3,30 +3,40 @@ import random
 import keyboard
 
 
-def getAcc(g):
-    if(g ==1):
+
+def getAcc(gear):
+    if(gear ==1):
         return(random.randrange(6,8))
-    if(g ==2):
+    if(gear ==2):
         return(random.randrange(4,6))
-    if(g ==3):
+    if(gear ==3):
         return(random.randrange(6,8))
-    if(g ==4):
+    if(gear ==4):
         return(random.randrange(3, 4))
-    if(g ==5):
+    if(gear ==5):
         return(random.randrange(1, 3))
 
+def getDistance(speed, time):
+    global elapsed
+    global avgSpeed
+    global distance
+    
+    elapsed += time
+    avgSpeed = (avgSpeed + speed)/2
+    distance += avgSpeed * (elapsed/3600)
+    return(int(distance))
 
 
-def getTopSpeed(g):
-    if(g == 1):
+def getTopSpeed(gear):
+    if(gear == 1):
         return(36)
-    if(g == 2):
+    if(gear == 2):
         return(80)
-    if(g == 3):
+    if(gear == 3):
         return(120)
-    if(g == 4):
+    if(gear == 4):
         return(156)
-    if(g == 5):
+    if(gear == 5):
         return(181)
 
 
@@ -43,15 +53,17 @@ def move():
     
     speed = 0  
     gear = 1 
+
     while True:
         
         while (isAccelerating()):
+            distance = getDistance(speed,updateSpeedometer())
             if(speed > getTopSpeed(gear)):
-                print(f"{space} {speed}            Change gear")
+                print(f"{space} {speed}            Change gear    [Trip:{distance} Km ]")
                 if keyboard.is_pressed("c"):
                     gear += 1               
             else:
-                print(f"{space} {speed}             Gear:{gear}" )
+                print(f"{space} {speed}             Gear:{gear} [Trip:{distance} Km ]" )
                 speed += getAcc(gear)
             time.sleep(updateSpeedometer())
         
@@ -77,7 +89,8 @@ def ignition():
     print("Ghrrrrrrrrrrrrrr..... Ghrrrrrrrrr.....",end="\n")
     accelerate();
 
-
+elapsed = 0
+avgSpeed = 0
+distance = 0
 space = "-------------------->"
 ignition()
- 
